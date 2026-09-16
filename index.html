@@ -2,581 +2,762 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Northstar Financial</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Northstar Private — Demo</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
-    }
+:root{
+  --navy:#07182f;
+  --navy2:#0d294d;
+  --blue:#2878e8;
+  --cyan:#42b7ff;
+  --bg:#f5f7fb;
+  --card:#fff;
+  --text:#172235;
+  --muted:#78859a;
+  --line:#e7ebf2;
+  --green:#159b61;
+  --red:#d94b57;
+  --shadow:0 12px 35px rgba(16,35,65,.07);
+}
 
-    body {
-        background: #f4f6f9;
-        color: #172033;
-    }
+*{box-sizing:border-box}
 
-    /* HEADER */
-    header {
-        height: 72px;
-        background: #071b3a;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 6%;
-        box-shadow: 0 2px 10px rgba(0,0,0,.12);
-    }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
 
-    .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: bold;
-        font-size: 20px;
-    }
+button,input{font:inherit}
 
-    .logo {
-        width: 38px;
-        height: 38px;
-        background: #2c8cff;
-        border-radius: 10px;
-        display: grid;
-        place-items: center;
-        font-weight: bold;
-    }
+.topbar{
+  height:72px;
+  background:var(--navy);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 max(22px,5vw);
+}
 
-    .profile {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:750;
+  letter-spacing:-.3px;
+}
 
-    .avatar {
-        width: 38px;
-        height: 38px;
-        background: #e5e9f0;
-        color: #071b3a;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        font-weight: bold;
-    }
+.logo{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  box-shadow:0 5px 16px rgba(45,137,238,.3);
+}
 
-    /* MAIN */
-    main {
-        max-width: 1150px;
-        margin: 45px auto;
-        padding: 0 22px;
-    }
+.profile{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:14px;
+}
 
-    .welcome {
-        margin-bottom: 28px;
-    }
+.profile small{
+  display:block;
+  color:#a9bad0;
+  margin-top:2px;
+}
 
-    .welcome p {
-        color: #687386;
-        margin-top: 6px;
-    }
+.avatar{
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  background:#e7eef8;
+  color:var(--navy);
+  display:grid;
+  place-items:center;
+  font-weight:750;
+}
 
-    .balance-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 18px;
-        margin-bottom: 28px;
-    }
+.demo{
+  position:fixed;
+  left:14px;
+  bottom:14px;
+  z-index:100;
+  background:#fff;
+  color:#6d7787;
+  border:1px solid var(--line);
+  padding:7px 10px;
+  border-radius:8px;
+  font-size:10px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
 
-    .card {
-        background: white;
-        border-radius: 16px;
-        padding: 25px;
-        box-shadow: 0 4px 18px rgba(20,35,60,.07);
-        border: 1px solid #e8ebf0;
-    }
+main{
+  width:min(1160px,calc(100% - 36px));
+  margin:42px auto 90px;
+}
 
-    .main-balance {
-        background: linear-gradient(135deg, #0a2b5c, #0d4d91);
-        color: white;
-        min-height: 190px;
-    }
+.welcome{
+  margin-bottom:25px;
+}
 
-    .label {
-        font-size: 13px;
-        color: #7a8494;
-        margin-bottom: 10px;
-    }
+.welcome h1{
+  margin:0;
+  font-size:30px;
+  letter-spacing:-.8px;
+}
 
-    .main-balance .label {
-        color: #bfd1e8;
-    }
+.welcome p{
+  color:var(--muted);
+  margin:7px 0 0;
+}
 
-    .amount {
-        font-size: 39px;
-        font-weight: 700;
-        letter-spacing: -1px;
-    }
+.hero{
+  position:relative;
+  overflow:hidden;
+  color:white;
+  min-height:205px;
+  border-radius:22px;
+  padding:30px;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(66,183,255,.28),transparent 32%),
+    linear-gradient(135deg,#092143,#10549a);
+  box-shadow:0 15px 40px rgba(9,42,82,.18);
+}
 
-    .account-number {
-        margin-top: 25px;
-        font-size: 13px;
-        color: #c7d8ed;
-    }
+.hero:after{
+  content:"";
+  position:absolute;
+  right:-90px;
+  bottom:-150px;
+  width:350px;
+  height:350px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;
+}
 
-    .small-amount {
-        font-size: 25px;
-        font-weight: bold;
-    }
+.hero-label{
+  color:#bdd2ec;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.7px;
+}
 
-    /* CONTENT */
-    .content {
-        display: grid;
-        grid-template-columns: 1.6fr 1fr;
-        gap: 20px;
-    }
+.balance{
+  margin-top:7px;
+  font-size:clamp(38px,6vw,55px);
+  font-weight:760;
+  letter-spacing:-2px;
+}
 
-    .card h2 {
-        margin-bottom: 20px;
-        font-size: 19px;
-    }
+.hero-bottom{
+  position:absolute;
+  left:30px;
+  bottom:24px;
+  color:#b9cce4;
+  font-size:13px;
+}
 
-    .transaction {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px 0;
-        border-bottom: 1px solid #edf0f4;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+  margin-top:18px;
+}
 
-    .transaction:last-child {
-        border-bottom: none;
-    }
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:17px;
+  box-shadow:var(--shadow);
+}
 
-    .transaction-left {
-        display: flex;
-        align-items: center;
-        gap: 13px;
-    }
+.account{
+  padding:22px;
+}
 
-    .transaction-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        background: #eef4fb;
-        color: #1767b1;
-        display: grid;
-        place-items: center;
-        font-weight: bold;
-    }
+.account-label{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:9px;
+}
 
-    .transaction-name {
-        font-weight: 600;
-    }
+.account-value{
+  font-size:25px;
+  font-weight:730;
+}
 
-    .transaction-date {
-        color: #8993a3;
-        font-size: 12px;
-        margin-top: 4px;
-    }
+.account-meta{
+  margin-top:13px;
+  font-size:12px;
+  color:#9aa4b4;
+}
 
-    .positive {
-        color: #15945a;
-        font-weight: bold;
-    }
+.content{
+  display:grid;
+  grid-template-columns:1.45fr .9fr;
+  gap:18px;
+  margin-top:20px;
+}
 
-    .negative {
-        color: #222;
-        font-weight: bold;
-    }
+.panel-card{
+  padding:23px;
+}
 
-    /* QUICK ACTIONS */
-    .action {
-        padding: 15px;
-        border: 1px solid #e5e9ef;
-        border-radius: 12px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        transition: .2s;
-    }
+.title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
 
-    .action:hover {
-        background: #f4f8fd;
-        border-color: #b9d4f2;
-    }
+.title-row h2{
+  font-size:18px;
+  margin:0;
+}
 
-    /* GEAR */
-    #gear {
-        position: fixed;
-        right: 22px;
-        bottom: 22px;
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        border: none;
-        background: #071b3a;
-        color: white;
-        font-size: 23px;
-        cursor: pointer;
-        box-shadow: 0 5px 20px rgba(0,0,0,.25);
-        z-index: 1000;
-    }
+.muted{
+  color:var(--muted);
+  font-size:12px;
+}
 
-    /* MOD PANEL */
-    #modPanel {
-        position: fixed;
-        right: 22px;
-        bottom: 85px;
-        width: 310px;
-        background: white;
-        border-radius: 16px;
-        padding: 22px;
-        box-shadow: 0 12px 40px rgba(0,0,0,.22);
-        border: 1px solid #dfe4eb;
-        display: none;
-        z-index: 999;
-    }
+.chart{
+  height:170px;
+  display:flex;
+  align-items:end;
+  gap:9px;
+  padding:12px 3px 0;
+}
 
-    #modPanel.show {
-        display: block;
-    }
+.bar{
+  flex:1;
+  min-width:10px;
+  border-radius:6px 6px 2px 2px;
+  background:linear-gradient(to top,var(--blue),var(--cyan));
+  opacity:.88;
+}
 
-    #modPanel h3 {
-        margin-bottom: 5px;
-    }
+.transactions{
+  margin-top:8px;
+}
 
-    .mod-subtitle {
-        color: #7b8594;
-        font-size: 12px;
-        margin-bottom: 18px;
-    }
+.tx{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
 
-    .field {
-        margin-bottom: 13px;
-    }
+.tx:last-child{border-bottom:0}
 
-    .field label {
-        display: block;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
-        color: #4f5a6b;
-    }
+.tx-icon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  background:#eef5ff;
+  color:#216fc8;
+  display:grid;
+  place-items:center;
+  font-weight:700;
+}
 
-    .field input {
-        width: 100%;
-        padding: 11px;
-        border: 1px solid #d8dde5;
-        border-radius: 9px;
-        outline: none;
-        font-size: 14px;
-    }
+.tx-main{flex:1}
 
-    .field input:focus {
-        border-color: #2685d9;
-    }
+.tx-name{
+  font-size:14px;
+  font-weight:650;
+}
 
-    .save {
-        width: 100%;
-        padding: 12px;
-        border: none;
-        border-radius: 9px;
-        background: #1269b0;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 5px;
-    }
+.tx-date{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
 
-    .reset {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        background: transparent;
-        color: #777;
-        cursor: pointer;
-        margin-top: 5px;
-    }
+.tx-amount{
+  font-size:14px;
+  font-weight:700;
+}
 
-    .fictional {
-        text-align: center;
-        color: #9ba3af;
-        font-size: 10px;
-        margin-top: 30px;
-    }
+.green{color:var(--green)}
+.red{color:var(--red)}
 
-    @media(max-width: 800px) {
-        .balance-grid {
-            grid-template-columns: 1fr;
-        }
+.actions{
+  display:grid;
+  gap:10px;
+}
 
-        .content {
-            grid-template-columns: 1fr;
-        }
+.action{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:11px;
+  padding:14px;
+  color:#26354a;
+  cursor:pointer;
+  text-align:left;
+  transition:.15s;
+}
 
-        header {
-            padding: 0 20px;
-        }
+.action:hover{
+  border-color:#bdd4f2;
+  background:#f8fbff;
+}
 
-        main {
-            margin-top: 28px;
-        }
+.action strong{
+  display:block;
+  font-size:13px;
+}
 
-        #modPanel {
-            right: 15px;
-            left: 15px;
-            width: auto;
-        }
-    }
+.action span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.footer{
+  text-align:center;
+  color:#9aa4b4;
+  font-size:10px;
+  margin-top:28px;
+}
+
+/* Gear */
+
+#gear{
+  position:fixed;
+  right:19px;
+  bottom:19px;
+  width:50px;
+  height:50px;
+  border:0;
+  border-radius:50%;
+  background:var(--navy);
+  color:white;
+  font-size:21px;
+  cursor:pointer;
+  z-index:1000;
+  box-shadow:0 9px 27px rgba(0,0,0,.25);
+  transition:.2s;
+}
+
+#gear:hover{
+  transform:rotate(30deg) scale(1.04);
+}
+
+/* Mod panel */
+
+#mod{
+  position:fixed;
+  right:19px;
+  bottom:80px;
+  width:330px;
+  max-width:calc(100vw - 38px);
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:21px;
+  box-shadow:0 22px 65px rgba(0,0,0,.22);
+  z-index:999;
+  opacity:0;
+  transform:translateY(12px) scale(.97);
+  pointer-events:none;
+  transition:.18s;
+}
+
+#mod.open{
+  opacity:1;
+  transform:none;
+  pointer-events:auto;
+}
+
+#mod h3{
+  margin:0 0 4px;
+}
+
+.mod-description{
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:17px;
+}
+
+.field{
+  margin-bottom:12px;
+}
+
+.field label{
+  display:block;
+  font-size:10px;
+  font-weight:700;
+  color:#697588;
+  margin-bottom:5px;
+  letter-spacing:.4px;
+}
+
+.field input{
+  width:100%;
+  border:1px solid #dce2eb;
+  border-radius:9px;
+  padding:10px;
+  outline:0;
+}
+
+.field input:focus{
+  border-color:var(--blue);
+}
+
+.mod-buttons{
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+}
+
+.mod-buttons button{
+  flex:1;
+  border:0;
+  border-radius:9px;
+  padding:11px;
+  cursor:pointer;
+  font-weight:650;
+}
+
+.apply{
+  background:var(--blue);
+  color:#fff;
+}
+
+.reset{
+  background:#edf1f6;
+  color:#39465a;
+}
+
+@media(max-width:800px){
+  .grid,
+  .content{
+    grid-template-columns:1fr;
+  }
+
+  main{
+    margin-top:27px;
+  }
+
+  .hero{
+    padding:24px;
+  }
+
+  .hero-bottom{
+    left:24px;
+  }
+}
+
+@media(max-width:500px){
+  .topbar{
+    padding:0 17px;
+  }
+
+  .brand{
+    font-size:16px;
+  }
+
+  .profile > div:first-child{
+    display:none;
+  }
+
+  .welcome h1{
+    font-size:25px;
+  }
+
+  .balance{
+    font-size:37px;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="brand">
-        <div class="logo">N</div>
-        <span>Northstar Financial</span>
-    </div>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">N</div>
+    Northstar Private
+  </div>
 
-    <div class="profile">
-        <div>
-            <div id="headerName">Alex Morgan</div>
-            <small style="color:#b8c5d8;">Personal Banking</small>
-        </div>
-        <div class="avatar" id="avatar">AM</div>
+  <div class="profile">
+    <div>
+      <div id="headerName">Alex Morgan</div>
+      <small>Personal account</small>
     </div>
+    <div class="avatar" id="avatar">AM</div>
+  </div>
 </header>
 
 <main>
 
-    <div class="welcome">
-        <h1>Good morning, <span id="welcomeName">Alex</span></h1>
-        <p>Here's your financial overview.</p>
+  <section class="welcome">
+    <h1>Good morning, <span id="firstName">Alex</span></h1>
+    <p>Here's your financial overview.</p>
+  </section>
+
+  <section class="hero">
+    <div class="hero-label">AVAILABLE BALANCE</div>
+    <div class="balance" id="balance">$87,398.12</div>
+    <div class="hero-bottom">Everyday Account •••• 4821</div>
+  </section>
+
+  <section class="grid">
+
+    <div class="card account">
+      <div class="account-label">Checking</div>
+      <div class="account-value" id="checking">$39,534.90</div>
+      <div class="account-meta">•••• 4821</div>
     </div>
 
-    <div class="balance-grid">
-
-        <div class="card main-balance">
-            <div class="label">Total Available Balance</div>
-            <div class="amount" id="totalBalance">$87,492,631.48</div>
-            <div class="account-number">Everyday Checking •••• 4821</div>
-        </div>
-
-        <div class="card">
-            <div class="label">Checking</div>
-            <div class="small-amount" id="checking">$42,381,204.12</div>
-        </div>
-
-        <div class="card">
-            <div class="label">Savings</div>
-            <div class="small-amount" id="savings">$45,111,427.36</div>
-        </div>
-
+    <div class="card account">
+      <div class="account-label">Savings</div>
+      <div class="account-value" id="savings">$47,863.22</div>
+      <div class="account-meta">•••• 9137</div>
     </div>
 
-    <div class="content">
-
-        <div class="card">
-            <h2>Recent activity</h2>
-
-            <div class="transaction">
-                <div class="transaction-left">
-                    <div class="transaction-icon">P</div>
-                    <div>
-                        <div class="transaction-name">Private Aviation</div>
-                        <div class="transaction-date">Today</div>
-                    </div>
-                </div>
-                <div class="negative" id="tx1">-$12,400,000.00</div>
-            </div>
-
-            <div class="transaction">
-                <div class="transaction-left">
-                    <div class="transaction-icon">+</div>
-                    <div>
-                        <div class="transaction-name">Investment Deposit</div>
-                        <div class="transaction-date">Yesterday</div>
-                    </div>
-                </div>
-                <div class="positive" id="tx2">+$5,250,000.00</div>
-            </div>
-
-            <div class="transaction">
-                <div class="transaction-left">
-                    <div class="transaction-icon">R</div>
-                    <div>
-                        <div class="transaction-name">Luxury Residence</div>
-                        <div class="transaction-date">Sep 12</div>
-                    </div>
-                </div>
-                <div class="negative" id="tx3">-$3,800,000.00</div>
-            </div>
-
-            <div class="transaction">
-                <div class="transaction-left">
-                    <div class="transaction-icon">+</div>
-                    <div>
-                        <div class="transaction-name">Portfolio Dividend</div>
-                        <div class="transaction-date">Sep 10</div>
-                    </div>
-                </div>
-                <div class="positive" id="tx4">+$820,450.00</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Quick actions</h2>
-
-            <div class="action">Transfer money</div>
-            <div class="action">Pay a bill</div>
-            <div class="action">View statements</div>
-            <div class="action">Account settings</div>
-        </div>
-
+    <div class="card account">
+      <div class="account-label">Investment portfolio</div>
+      <div class="account-value" id="investments">$112,450.76</div>
+      <div class="account-meta">Market value</div>
     </div>
 
-    <div class="fictional">
-        Fictional demonstration interface — not a real financial institution.
+  </section>
+
+  <section class="content">
+
+    <div class="card panel-card">
+      <div class="title-row">
+        <h2>Account activity</h2>
+        <span class="muted">Last 7 months</span>
+      </div>
+
+      <div class="chart">
+        <div class="bar" style="height:42%"></div>
+        <div class="bar" style="height:51%"></div>
+        <div class="bar" style="height:47%"></div>
+        <div class="bar" style="height:63%"></div>
+        <div class="bar" style="height:58%"></div>
+        <div class="bar" style="height:79%"></div>
+        <div class="bar" style="height:91%"></div>
+      </div>
+
+      <div class="transactions">
+
+        <div class="tx">
+          <div class="tx-icon">↗</div>
+          <div class="tx-main">
+            <div class="tx-name">Resale marketplace payout</div>
+            <div class="tx-date">Today • Checking</div>
+          </div>
+          <div class="tx-amount green">+$4,820.00</div>
+        </div>
+
+        <div class="tx">
+          <div class="tx-icon">◆</div>
+          <div class="tx-main">
+            <div class="tx-name">Inventory purchase</div>
+            <div class="tx-date">Yesterday • Checking</div>
+          </div>
+          <div class="tx-amount red">-$1,284.50</div>
+        </div>
+
+        <div class="tx">
+          <div class="tx-icon">↗</div>
+          <div class="tx-main">
+            <div class="tx-name">Marketplace payout</div>
+            <div class="tx-date">Sep 13 • Checking</div>
+          </div>
+          <div class="tx-amount green">+$2,760.00</div>
+        </div>
+
+        <div class="tx">
+          <div class="tx-icon">▣</div>
+          <div class="tx-main">
+            <div class="tx-name">Shipping expenses</div>
+            <div class="tx-date">Sep 11 • Checking</div>
+          </div>
+          <div class="tx-amount red">-$384.72</div>
+        </div>
+
+      </div>
     </div>
+
+    <div class="card panel-card">
+      <div class="title-row">
+        <h2>Quick actions</h2>
+      </div>
+
+      <div class="actions">
+        <button class="action">
+          <strong>Transfer money</strong>
+          <span>Move money between accounts</span>
+        </button>
+
+        <button class="action">
+          <strong>View statements</strong>
+          <span>Review account activity</span>
+        </button>
+
+        <button class="action">
+          <strong>Manage accounts</strong>
+          <span>Account preferences</span>
+        </button>
+
+        <button class="action">
+          <strong>Security</strong>
+          <span>Review security settings</span>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="footer">
+    Fictional demonstration interface — no real banking services or financial transactions.
+  </div>
 
 </main>
 
-<!-- HIDDEN MOD PANEL -->
-<div id="modPanel">
+<div class="demo">DEMO</div>
 
-    <h3>Display Controls</h3>
-    <div class="mod-subtitle">
-        Changes only affect this browser's fictional dashboard.
-    </div>
+<!-- Hidden controls -->
+<div id="mod">
 
-    <div class="field">
-        <label>ACCOUNT NAME</label>
-        <input id="nameInput" type="text" value="Alex Morgan">
-    </div>
+  <h3>Display Controls</h3>
+  <div class="mod-description">
+    Changes are saved locally in this browser.
+  </div>
 
-    <div class="field">
-        <label>TOTAL BALANCE</label>
-        <input id="balanceInput" type="number" step="0.01" value="87492631.48">
-    </div>
+  <div class="field">
+    <label>ACCOUNT NAME</label>
+    <input id="nameInput" value="Alex Morgan">
+  </div>
 
-    <div class="field">
-        <label>CHECKING</label>
-        <input id="checkingInput" type="number" step="0.01" value="42381204.12">
-    </div>
+  <div class="field">
+    <label>AVAILABLE BALANCE</label>
+    <input id="balanceInput" type="number" step="0.01" value="87398.12">
+  </div>
 
-    <div class="field">
-        <label>SAVINGS</label>
-        <input id="savingsInput" type="number" step="0.01" value="45111427.36">
-    </div>
+  <div class="field">
+    <label>CHECKING</label>
+    <input id="checkingInput" type="number" step="0.01" value="39534.90">
+  </div>
 
-    <div class="field">
-        <label>TRANSACTION 1</label>
-        <input id="tx1Input" type="number" step="0.01" value="-12400000">
-    </div>
+  <div class="field">
+    <label>SAVINGS</label>
+    <input id="savingsInput" type="number" step="0.01" value="47863.22">
+  </div>
 
-    <div class="field">
-        <label>TRANSACTION 2</label>
-        <input id="tx2Input" type="number" step="0.01" value="5250000">
-    </div>
+  <div class="field">
+    <label>INVESTMENTS</label>
+    <input id="investmentsInput" type="number" step="0.01" value="112450.76">
+  </div>
 
-    <button class="save" onclick="saveChanges()">Apply Changes</button>
-    <button class="reset" onclick="resetChanges()">Reset</button>
+  <div class="mod-buttons">
+    <button class="reset" onclick="resetData()">Reset</button>
+    <button class="apply" onclick="saveData()">Apply</button>
+  </div>
 
 </div>
 
-<button id="gear" onclick="togglePanel()">⚙</button>
+<button id="gear" onclick="toggleMod()" aria-label="Open controls">⚙</button>
 
 <script>
 
-const money = value => {
-    return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD"
-    }).format(Number(value));
+const defaults = {
+  name: "Alex Morgan",
+  balance: 87398.12,
+  checking: 39534.90,
+  savings: 47863.22,
+  investments: 112450.76
 };
 
-function initials(name) {
-    return name
-        .split(" ")
-        .map(word => word[0])
-        .join("")
-        .slice(0,2)
-        .toUpperCase();
+function money(number){
+  return Number(number).toLocaleString("en-US",{
+    style:"currency",
+    currency:"USD",
+    minimumFractionDigits:2
+  });
 }
 
-function firstName(name) {
-    return name.split(" ")[0];
+function getInitials(name){
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0,2)
+    .map(x=>x[0])
+    .join("")
+    .toUpperCase();
 }
 
-function togglePanel() {
-    document.getElementById("modPanel").classList.toggle("show");
+function updatePage(data){
+
+  const name = data.name || defaults.name;
+
+  document.getElementById("headerName").textContent = name;
+  document.getElementById("firstName").textContent =
+    name.trim().split(/\s+/)[0] || "Alex";
+
+  document.getElementById("avatar").textContent = getInitials(name);
+
+  document.getElementById("balance").textContent = money(data.balance);
+  document.getElementById("checking").textContent = money(data.checking);
+  document.getElementById("savings").textContent = money(data.savings);
+  document.getElementById("investments").textContent = money(data.investments);
+
+  document.getElementById("nameInput").value = name;
+  document.getElementById("balanceInput").value = data.balance;
+  document.getElementById("checkingInput").value = data.checking;
+  document.getElementById("savingsInput").value = data.savings;
+  document.getElementById("investmentsInput").value = data.investments;
 }
 
-function saveChanges() {
+function saveData(){
 
-    const data = {
-        name: document.getElementById("nameInput").value || "Alex Morgan",
-        balance: document.getElementById("balanceInput").value,
-        checking: document.getElementById("checkingInput").value,
-        savings: document.getElementById("savingsInput").value,
-        tx1: document.getElementById("tx1Input").value,
-        tx2: document.getElementById("tx2Input").value
-    };
+  const data = {
+    name: document.getElementById("nameInput").value || defaults.name,
+    balance: Number(document.getElementById("balanceInput").value) || 0,
+    checking: Number(document.getElementById("checkingInput").value) || 0,
+    savings: Number(document.getElementById("savingsInput").value) || 0,
+    investments: Number(document.getElementById("investmentsInput").value) || 0
+  };
 
-    localStorage.setItem("northstarData", JSON.stringify(data));
+  localStorage.setItem(
+    "northstarDemo",
+    JSON.stringify(data)
+  );
 
-    applyData(data);
+  updatePage(data);
 }
 
-function applyData(data) {
-
-    document.getElementById("headerName").textContent = data.name;
-    document.getElementById("welcomeName").textContent = firstName(data.name);
-    document.getElementById("avatar").textContent = initials(data.name);
-
-    document.getElementById("totalBalance").textContent = money(data.balance);
-    document.getElementById("checking").textContent = money(data.checking);
-    document.getElementById("savings").textContent = money(data.savings);
-
-    document.getElementById("tx1").textContent =
-        (Number(data.tx1) < 0 ? "-" : "+") + money(Math.abs(data.tx1));
-
-    document.getElementById("tx2").textContent =
-        (Number(data.tx2) < 0 ? "-" : "+") + money(Math.abs(data.tx2));
-
-    document.getElementById("nameInput").value = data.name;
-    document.getElementById("balanceInput").value = data.balance;
-    document.getElementById("checkingInput").value = data.checking;
-    document.getElementById("savingsInput").value = data.savings;
-    document.getElementById("tx1Input").value = data.tx1;
-    document.getElementById("tx2Input").value = data.tx2;
+function resetData(){
+  localStorage.removeItem("northstarDemo");
+  updatePage(defaults);
 }
 
-function resetChanges() {
-
-    localStorage.removeItem("northstarData");
-
-    const defaults = {
-        name: "Alex Morgan",
-        balance: "87492631.48",
-        checking: "42381204.12",
-        savings: "45111427.36",
-        tx1: "-12400000",
-        tx2: "5250000"
-    };
-
-    applyData(defaults);
+function toggleMod(){
+  document.getElementById("mod").classList.toggle("open");
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+const saved = localStorage.getItem("northstarDemo");
 
-    const saved = localStorage.getItem("northstarData");
-
-    if (saved) {
-        applyData(JSON.parse(saved));
-    }
-});
+if(saved){
+  try{
+    updatePage(JSON.parse(saved));
+  }catch{
+    updatePage(defaults);
+  }
+}else{
+  updatePage(defaults);
+}
 
 </script>
 
