@@ -1,765 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Northstar Private — Demo</title>
+<section class="card crypto-section">
 
-<style>
-:root{
-  --navy:#07182f;
-  --navy2:#0d294d;
-  --blue:#2878e8;
-  --cyan:#42b7ff;
-  --bg:#f5f7fb;
-  --card:#fff;
-  --text:#172235;
-  --muted:#78859a;
-  --line:#e7ebf2;
-  --green:#159b61;
-  --red:#d94b57;
-  --shadow:0 12px 35px rgba(16,35,65,.07);
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-}
-
-button,input{font:inherit}
-
-.topbar{
-  height:72px;
-  background:var(--navy);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 max(22px,5vw);
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:750;
-  letter-spacing:-.3px;
-}
-
-.logo{
-  width:38px;
-  height:38px;
-  display:grid;
-  place-items:center;
-  border-radius:11px;
-  background:linear-gradient(135deg,var(--blue),var(--cyan));
-  box-shadow:0 5px 16px rgba(45,137,238,.3);
-}
-
-.profile{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  font-size:14px;
-}
-
-.profile small{
-  display:block;
-  color:#a9bad0;
-  margin-top:2px;
-}
-
-.avatar{
-  width:39px;
-  height:39px;
-  border-radius:50%;
-  background:#e7eef8;
-  color:var(--navy);
-  display:grid;
-  place-items:center;
-  font-weight:750;
-}
-
-.demo{
-  position:fixed;
-  left:14px;
-  bottom:14px;
-  z-index:100;
-  background:#fff;
-  color:#6d7787;
-  border:1px solid var(--line);
-  padding:7px 10px;
-  border-radius:8px;
-  font-size:10px;
-  box-shadow:0 5px 18px rgba(0,0,0,.06);
-}
-
-main{
-  width:min(1160px,calc(100% - 36px));
-  margin:42px auto 90px;
-}
-
-.welcome{
-  margin-bottom:25px;
-}
-
-.welcome h1{
-  margin:0;
-  font-size:30px;
-  letter-spacing:-.8px;
-}
-
-.welcome p{
-  color:var(--muted);
-  margin:7px 0 0;
-}
-
-.hero{
-  position:relative;
-  overflow:hidden;
-  color:white;
-  min-height:205px;
-  border-radius:22px;
-  padding:30px;
-  background:
-    radial-gradient(circle at 85% 15%,rgba(66,183,255,.28),transparent 32%),
-    linear-gradient(135deg,#092143,#10549a);
-  box-shadow:0 15px 40px rgba(9,42,82,.18);
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  right:-90px;
-  bottom:-150px;
-  width:350px;
-  height:350px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:50%;
-}
-
-.hero-label{
-  color:#bdd2ec;
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.7px;
-}
-
-.balance{
-  margin-top:7px;
-  font-size:clamp(38px,6vw,55px);
-  font-weight:760;
-  letter-spacing:-2px;
-}
-
-.hero-bottom{
-  position:absolute;
-  left:30px;
-  bottom:24px;
-  color:#b9cce4;
-  font-size:13px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:17px;
-  margin-top:18px;
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:17px;
-  box-shadow:var(--shadow);
-}
-
-.account{
-  padding:22px;
-}
-
-.account-label{
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:9px;
-}
-
-.account-value{
-  font-size:25px;
-  font-weight:730;
-}
-
-.account-meta{
-  margin-top:13px;
-  font-size:12px;
-  color:#9aa4b4;
-}
-
-.content{
-  display:grid;
-  grid-template-columns:1.45fr .9fr;
-  gap:18px;
-  margin-top:20px;
-}
-
-.panel-card{
-  padding:23px;
-}
-
-.title-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:18px;
-}
-
-.title-row h2{
-  font-size:18px;
-  margin:0;
-}
-
-.muted{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.chart{
-  height:170px;
-  display:flex;
-  align-items:end;
-  gap:9px;
-  padding:12px 3px 0;
-}
-
-.bar{
-  flex:1;
-  min-width:10px;
-  border-radius:6px 6px 2px 2px;
-  background:linear-gradient(to top,var(--blue),var(--cyan));
-  opacity:.88;
-}
-
-.transactions{
-  margin-top:8px;
-}
-
-.tx{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:15px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.tx:last-child{border-bottom:0}
-
-.tx-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background:#eef5ff;
-  color:#216fc8;
-  display:grid;
-  place-items:center;
-  font-weight:700;
-}
-
-.tx-main{flex:1}
-
-.tx-name{
-  font-size:14px;
-  font-weight:650;
-}
-
-.tx-date{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:4px;
-}
-
-.tx-amount{
-  font-size:14px;
-  font-weight:700;
-}
-
-.green{color:var(--green)}
-.red{color:var(--red)}
-
-.actions{
-  display:grid;
-  gap:10px;
-}
-
-.action{
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:11px;
-  padding:14px;
-  color:#26354a;
-  cursor:pointer;
-  text-align:left;
-  transition:.15s;
-}
-
-.action:hover{
-  border-color:#bdd4f2;
-  background:#f8fbff;
-}
-
-.action strong{
-  display:block;
-  font-size:13px;
-}
-
-.action span{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.footer{
-  text-align:center;
-  color:#9aa4b4;
-  font-size:10px;
-  margin-top:28px;
-}
-
-/* Gear */
-
-#gear{
-  position:fixed;
-  right:19px;
-  bottom:19px;
-  width:50px;
-  height:50px;
-  border:0;
-  border-radius:50%;
-  background:var(--navy);
-  color:white;
-  font-size:21px;
-  cursor:pointer;
-  z-index:1000;
-  box-shadow:0 9px 27px rgba(0,0,0,.25);
-  transition:.2s;
-}
-
-#gear:hover{
-  transform:rotate(30deg) scale(1.04);
-}
-
-/* Mod panel */
-
-#mod{
-  position:fixed;
-  right:19px;
-  bottom:80px;
-  width:330px;
-  max-width:calc(100vw - 38px);
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:21px;
-  box-shadow:0 22px 65px rgba(0,0,0,.22);
-  z-index:999;
-  opacity:0;
-  transform:translateY(12px) scale(.97);
-  pointer-events:none;
-  transition:.18s;
-}
-
-#mod.open{
-  opacity:1;
-  transform:none;
-  pointer-events:auto;
-}
-
-#mod h3{
-  margin:0 0 4px;
-}
-
-.mod-description{
-  color:var(--muted);
-  font-size:11px;
-  margin-bottom:17px;
-}
-
-.field{
-  margin-bottom:12px;
-}
-
-.field label{
-  display:block;
-  font-size:10px;
-  font-weight:700;
-  color:#697588;
-  margin-bottom:5px;
-  letter-spacing:.4px;
-}
-
-.field input{
-  width:100%;
-  border:1px solid #dce2eb;
-  border-radius:9px;
-  padding:10px;
-  outline:0;
-}
-
-.field input:focus{
-  border-color:var(--blue);
-}
-
-.mod-buttons{
-  display:flex;
-  gap:8px;
-  margin-top:15px;
-}
-
-.mod-buttons button{
-  flex:1;
-  border:0;
-  border-radius:9px;
-  padding:11px;
-  cursor:pointer;
-  font-weight:650;
-}
-
-.apply{
-  background:var(--blue);
-  color:#fff;
-}
-
-.reset{
-  background:#edf1f6;
-  color:#39465a;
-}
-
-@media(max-width:800px){
-  .grid,
-  .content{
-    grid-template-columns:1fr;
-  }
-
-  main{
-    margin-top:27px;
-  }
-
-  .hero{
-    padding:24px;
-  }
-
-  .hero-bottom{
-    left:24px;
-  }
-}
-
-@media(max-width:500px){
-  .topbar{
-    padding:0 17px;
-  }
-
-  .brand{
-    font-size:16px;
-  }
-
-  .profile > div:first-child{
-    display:none;
-  }
-
-  .welcome h1{
-    font-size:25px;
-  }
-
-  .balance{
-    font-size:37px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header class="topbar">
-  <div class="brand">
-    <div class="logo">N</div>
-    Northstar Private
-  </div>
-
-  <div class="profile">
+  <div class="title-row">
     <div>
-      <div id="headerName">Alex Morgan</div>
-      <small>Personal account</small>
+      <h2>Crypto Portfolio</h2>
+      <span class="muted">Digital assets</span>
     </div>
-    <div class="avatar" id="avatar">AM</div>
+    <span class="crypto-total" id="cryptoTotal">$135,617.12</span>
   </div>
-</header>
 
-<main>
+  <div class="crypto-grid">
 
-  <section class="welcome">
-    <h1>Good morning, <span id="firstName">Alex</span></h1>
-    <p>Here's your financial overview.</p>
-  </section>
-
-  <section class="hero">
-    <div class="hero-label">AVAILABLE BALANCE</div>
-    <div class="balance" id="balance">$87,398.12</div>
-    <div class="hero-bottom">Everyday Account •••• 4821</div>
-  </section>
-
-  <section class="grid">
-
-    <div class="card account">
-      <div class="account-label">Checking</div>
-      <div class="account-value" id="checking">$39,534.90</div>
-      <div class="account-meta">•••• 4821</div>
-    </div>
-
-    <div class="card account">
-      <div class="account-label">Savings</div>
-      <div class="account-value" id="savings">$47,863.22</div>
-      <div class="account-meta">•••• 9137</div>
-    </div>
-
-    <div class="card account">
-      <div class="account-label">Investment portfolio</div>
-      <div class="account-value" id="investments">$112,450.76</div>
-      <div class="account-meta">Market value</div>
-    </div>
-
-  </section>
-
-  <section class="content">
-
-    <div class="card panel-card">
-      <div class="title-row">
-        <h2>Account activity</h2>
-        <span class="muted">Last 7 months</span>
-      </div>
-
-      <div class="chart">
-        <div class="bar" style="height:42%"></div>
-        <div class="bar" style="height:51%"></div>
-        <div class="bar" style="height:47%"></div>
-        <div class="bar" style="height:63%"></div>
-        <div class="bar" style="height:58%"></div>
-        <div class="bar" style="height:79%"></div>
-        <div class="bar" style="height:91%"></div>
-      </div>
-
-      <div class="transactions">
-
-        <div class="tx">
-          <div class="tx-icon">↗</div>
-          <div class="tx-main">
-            <div class="tx-name">Resale marketplace payout</div>
-            <div class="tx-date">Today • Checking</div>
-          </div>
-          <div class="tx-amount green">+$4,820.00</div>
+    <div class="crypto-card btc">
+      <div class="crypto-top">
+        <div class="coin-icon">₿</div>
+        <div>
+          <strong>Bitcoin</strong>
+          <small>BTC</small>
         </div>
-
-        <div class="tx">
-          <div class="tx-icon">◆</div>
-          <div class="tx-main">
-            <div class="tx-name">Inventory purchase</div>
-            <div class="tx-date">Yesterday • Checking</div>
-          </div>
-          <div class="tx-amount red">-$1,284.50</div>
-        </div>
-
-        <div class="tx">
-          <div class="tx-icon">↗</div>
-          <div class="tx-main">
-            <div class="tx-name">Marketplace payout</div>
-            <div class="tx-date">Sep 13 • Checking</div>
-          </div>
-          <div class="tx-amount green">+$2,760.00</div>
-        </div>
-
-        <div class="tx">
-          <div class="tx-icon">▣</div>
-          <div class="tx-main">
-            <div class="tx-name">Shipping expenses</div>
-            <div class="tx-date">Sep 11 • Checking</div>
-          </div>
-          <div class="tx-amount red">-$384.72</div>
-        </div>
-
       </div>
+
+      <div class="coin-holdings" id="btcAmount">0.8421 BTC</div>
+      <div class="coin-value" id="btcValue">$95,420.18</div>
+      <div class="coin-change positive">+4.82% today</div>
     </div>
 
-    <div class="card panel-card">
-      <div class="title-row">
-        <h2>Quick actions</h2>
+    <div class="crypto-card eth">
+      <div class="crypto-top">
+        <div class="coin-icon">Ξ</div>
+        <div>
+          <strong>Ethereum</strong>
+          <small>ETH</small>
+        </div>
       </div>
 
-      <div class="actions">
-        <button class="action">
-          <strong>Transfer money</strong>
-          <span>Move money between accounts</span>
-        </button>
-
-        <button class="action">
-          <strong>View statements</strong>
-          <span>Review account activity</span>
-        </button>
-
-        <button class="action">
-          <strong>Manage accounts</strong>
-          <span>Account preferences</span>
-        </button>
-
-        <button class="action">
-          <strong>Security</strong>
-          <span>Review security settings</span>
-        </button>
-      </div>
+      <div class="coin-holdings" id="ethAmount">8.42 ETH</div>
+      <div class="coin-value" id="ethValue">$31,284.60</div>
+      <div class="coin-change positive">+2.14% today</div>
     </div>
 
-  </section>
+    <div class="crypto-card sol">
+      <div class="crypto-top">
+        <div class="coin-icon">S</div>
+        <div>
+          <strong>Solana</strong>
+          <small>SOL</small>
+        </div>
+      </div>
 
-  <div class="footer">
-    Fictional demonstration interface — no real banking services or financial transactions.
+      <div class="coin-holdings" id="solAmount">42.7 SOL</div>
+      <div class="coin-value" id="solValue">$8,912.34</div>
+      <div class="coin-change positive">+6.31% today</div>
+    </div>
+
   </div>
 
-</main>
+  <div class="crypto-chart">
+    <div class="chart-label">
+      <span>Portfolio performance</span>
+      <strong>+18.42%</strong>
+    </div>
 
-<div class="demo">DEMO</div>
+    <div class="line-chart">
+      <svg viewBox="0 0 700 170" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="cryptoFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2878e8" stop-opacity=".30"/>
+            <stop offset="100%" stop-color="#2878e8" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
 
-<!-- Hidden controls -->
-<div id="mod">
+        <path
+          d="M0,145
+             C45,138 55,118 95,126
+             S150,108 190,116
+             S235,92 275,102
+             S330,74 370,88
+             S420,68 455,73
+             S500,45 535,60
+             S590,33 620,43
+             S665,18 700,28
+             L700,170 L0,170 Z"
+          fill="url(#cryptoFill)"
+        />
 
-  <h3>Display Controls</h3>
-  <div class="mod-description">
-    Changes are saved locally in this browser.
+        <path
+          d="M0,145
+             C45,138 55,118 95,126
+             S150,108 190,116
+             S235,92 275,102
+             S330,74 370,88
+             S420,68 455,73
+             S500,45 535,60
+             S590,33 620,43
+             S665,18 700,28"
+          fill="none"
+          stroke="#2878e8"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
   </div>
 
-  <div class="field">
-    <label>ACCOUNT NAME</label>
-    <input id="nameInput" value="Alex Morgan">
-  </div>
-
-  <div class="field">
-    <label>AVAILABLE BALANCE</label>
-    <input id="balanceInput" type="number" step="0.01" value="87398.12">
-  </div>
-
-  <div class="field">
-    <label>CHECKING</label>
-    <input id="checkingInput" type="number" step="0.01" value="39534.90">
-  </div>
-
-  <div class="field">
-    <label>SAVINGS</label>
-    <input id="savingsInput" type="number" step="0.01" value="47863.22">
-  </div>
-
-  <div class="field">
-    <label>INVESTMENTS</label>
-    <input id="investmentsInput" type="number" step="0.01" value="112450.76">
-  </div>
-
-  <div class="mod-buttons">
-    <button class="reset" onclick="resetData()">Reset</button>
-    <button class="apply" onclick="saveData()">Apply</button>
-  </div>
-
-</div>
-
-<button id="gear" onclick="toggleMod()" aria-label="Open controls">⚙</button>
-
-<script>
-
-const defaults = {
-  name: "Alex Morgan",
-  balance: 87398.12,
-  checking: 39534.90,
-  savings: 47863.22,
-  investments: 112450.76
-};
-
-function money(number){
-  return Number(number).toLocaleString("en-US",{
-    style:"currency",
-    currency:"USD",
-    minimumFractionDigits:2
-  });
-}
-
-function getInitials(name){
-  return name
-    .trim()
-    .split(/\s+/)
-    .slice(0,2)
-    .map(x=>x[0])
-    .join("")
-    .toUpperCase();
-}
-
-function updatePage(data){
-
-  const name = data.name || defaults.name;
-
-  document.getElementById("headerName").textContent = name;
-  document.getElementById("firstName").textContent =
-    name.trim().split(/\s+/)[0] || "Alex";
-
-  document.getElementById("avatar").textContent = getInitials(name);
-
-  document.getElementById("balance").textContent = money(data.balance);
-  document.getElementById("checking").textContent = money(data.checking);
-  document.getElementById("savings").textContent = money(data.savings);
-  document.getElementById("investments").textContent = money(data.investments);
-
-  document.getElementById("nameInput").value = name;
-  document.getElementById("balanceInput").value = data.balance;
-  document.getElementById("checkingInput").value = data.checking;
-  document.getElementById("savingsInput").value = data.savings;
-  document.getElementById("investmentsInput").value = data.investments;
-}
-
-function saveData(){
-
-  const data = {
-    name: document.getElementById("nameInput").value || defaults.name,
-    balance: Number(document.getElementById("balanceInput").value) || 0,
-    checking: Number(document.getElementById("checkingInput").value) || 0,
-    savings: Number(document.getElementById("savingsInput").value) || 0,
-    investments: Number(document.getElementById("investmentsInput").value) || 0
-  };
-
-  localStorage.setItem(
-    "northstarDemo",
-    JSON.stringify(data)
-  );
-
-  updatePage(data);
-}
-
-function resetData(){
-  localStorage.removeItem("northstarDemo");
-  updatePage(defaults);
-}
-
-function toggleMod(){
-  document.getElementById("mod").classList.toggle("open");
-}
-
-const saved = localStorage.getItem("northstarDemo");
-
-if(saved){
-  try{
-    updatePage(JSON.parse(saved));
-  }catch{
-    updatePage(defaults);
-  }
-}else{
-  updatePage(defaults);
-}
-
-</script>
-
-</body>
-</html>
+</section>
